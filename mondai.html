@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset='utf-8'>
+    <title>英単語 問題</title>
+    <style>
+        body{
+            text-align: center;
+            margin: auto ;
+        }
+        button{
+            height: 100px;
+            width: 300px;
+        }
+
+        #kaitoubutton{
+            margin-top: 100px;
+        }
+        #anser,#question{
+            text-align: center;
+            height: 60px;
+            width:600px;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>英単語をランダムで5問表示します</h1>
+    <button type="button" id="start-button">問題開始</button>
+    <!--  問題番号表示-->
+    <div id="mondainum"></div>
+    <!-- 問題内容表示-->
+    <div id="area1">問題開始を押してください</div>
+    <!--  回答用入力欄-->
+    <div class="kaitou-text">
+        <input type="text" id="anser" size="50">
+    </div>
+    <!--  回答ボタン-->
+    <button type="button" id="kaitou-button">回答</button>
+    <!--  リセットボタン-->
+    <button type="button" id="reset-button">リセット</button>
+
+    
+    <script>
+
+        //回答数リセット（０をいれておく)
+            var num = 0;
+
+        //正解・不正解の数を入れておく
+            var ok = 0;
+            var ng = 0;
+  
+        //出題用にランダムな数値を5個重複しないよう作る
+
+        var randoms = [];
+        function randomnums(){
+            var min = 1, max = 5;
+                 for(i = min; i <= max; i++){
+                 while(true){
+                        var tmp = intRandom(min, max);
+                    if(!randoms.includes(tmp)){
+                        randoms.push(tmp);
+                        break;
+                        }
+                     }
+                 }
+        }
+
+        //開始ボタン実施時
+        document.getElementById("start-button").onclick = function(){
+
+            //数字をシャッフル
+            randomnums();
+
+            //スタート後問題開始ボタン無効
+                let startbutton = document.querySelector("#start-button");
+                startbutton.disabled = true;
+            //回答数リセット（０をいれておく)
+                if(num != 0 || num == null){
+                    num = 0;
+                }
+
+            //問題を表示
+            document.getElementById("area1").innerHTML =
+            "<h3>英語で答えてください</h3>"+
+            "<h3 style='color: red;'>" + japanese[randoms[num]] + "</h3>";
+
+        }
+
+
+        //回答ボタンクリック（回答動作)
+        document.getElementById("kaitou-button").onclick = function(){
+
+                //答えの取得
+                var kotae = english[randoms[num]];
+            
+                //ここで回答できる数が変わる
+                if(num < 4){
+
+                //回答の判定
+                var kaitou = document.getElementById("anser").value;
+                    if(kaitou == kotae){
+                        ok += 1;
+                        window.alert('正解');
+                    } 
+                    else{
+                        ng += 1;
+                        window.alert('不正解');
+                    }
+                
+                //回答数のカウント
+                    num += 1; 
+                //次の問題問題を表示
+                document.getElementById("area1").innerHTML =
+                "<h3>英語で答えてください</h3>"+
+                "<h3 style='color: red;'>" + japanese[randoms[num]] + "</h3>"   
+               }         
+                //５回回答後の処理
+                else{
+                //回答ボタンの無効化
+                let anserbutton = document.querySelector("#kaitou-button");
+                    anserbutton.disabled = true;
+
+                document.getElementById("area1").innerHTML =
+                "<h3>リセットボタンを押してください</h3>";
+                }
+        }
+        
+
+        //リセットボタン実施時
+        document.getElementById("reset-button").onclick = function(){
+            //問題回答数をリセット
+            num = 0;
+            ok  = 0;
+            ng  = 0;
+            //スタート問題開始ボタン有効
+            let startbutton = document.querySelector("#start-button");
+                startbutton.disabled = false;
+            //再度数字をシャッフル
+            randoms = [];
+            randomnums();
+            //回答ボタンの有効化
+            let anserbutton = document.querySelector("#kaitou-button");
+            anserbutton.disabled = false;
+        }
+
+        //ランダムして整数を返す
+        function intRandom(min, max){
+             return Math.floor( Math.random() * (max - min + 1)) + min;
+        }
+        
+        
+
+            //問題集（ここを増やして拡張可能）
+            let japanese = new Array(5);
+            let english  = new Array(5);
+            japanese[0] = '目';
+            english[0]  =  'eye';
+            japanese[1] = '髪の毛';
+            english[1]  =  'hair';
+            japanese[2] = '鼻';
+            english[2] =  'nose';
+            japanese[3] = '歯';
+            english [3] = 'teeth';
+            japanese[4] = '首';
+            english [4] = 'neck';
+            japanese[5] = '耳';
+            english [5] = 'ear';
+    </script>
+</body>
+</html>
