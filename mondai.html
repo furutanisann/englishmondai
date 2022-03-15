@@ -129,19 +129,8 @@
 
         //リセットボタン実施時
         document.getElementById("reset-button").onclick = function(){
-            //問題回答数をリセット
-            num = 0;
-            ok  = 0;
-            ng  = 0;
-            //スタート問題開始ボタン有効
-            let startbutton = document.querySelector("#start-button");
-                startbutton.disabled = false;
-            //再度数字をシャッフル
-            randoms = [];
-            randomnums();
-            //回答ボタンの有効化
-            let anserbutton = document.querySelector("#kaitou-button");
-            anserbutton.disabled = false;
+            //reloadメソッドを使ってページをリロードすることでリセットとする
+            window.location.reload();            
         }
 
         //ランダムして整数を返す
