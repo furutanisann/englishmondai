@@ -39,6 +39,9 @@
     <button type="button" id="kaitou-button">回答</button>
     <!--  リセットボタン-->
     <button type="button" id="reset-button">リセット</button>
+    <!--  回答内容表示-->
+    <div class="kaitou">
+    </div>
 
     
     <script>
@@ -83,6 +86,7 @@
             //問題を表示
             document.getElementById("area1").innerHTML =
             "<h3>英語で答えてください</h3>"+
+            "<h3>" +  "第" + (num + 1) + "問" + "</h3>" +
             "<h3 style='color: red;'>" + japanese[randoms[num]] + "</h3>";
 
         }
@@ -112,8 +116,9 @@
                     num += 1; 
                 //次の問題問題を表示
                 document.getElementById("area1").innerHTML =
-                "<h3>英語で答えてください</h3>"+
-                "<h3 style='color: red;'>" + japanese[randoms[num]] + "</h3>"   
+                "<h3>英語で答えてください</h3>" +
+                "<h3>" +  "第" + (num + 1) + "問" + "</h3>" +
+                "<h3 style='color: red;'>" + japanese[randoms[num]] + "</h3>";
                }         
                 //５回回答後の処理
                 else{
@@ -123,6 +128,9 @@
 
                 document.getElementById("area1").innerHTML =
                 "<h3>リセットボタンを押してください</h3>";
+                //回答結果表示
+                document.getElementById("kaitou").innerHTML = 
+                "";
                 }
         }
         
