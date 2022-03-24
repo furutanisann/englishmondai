@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
+
     <title>英単語 問題</title>
+
     <style>
         body{
             text-align: center;
@@ -21,7 +23,42 @@
             height: 60px;
             width:600px;
         }
-        
+
+        #start-button{
+            position: relative;
+            z-index: 2;
+            background-color: aquamarine;
+            border: 2px solid #333;
+            line-height: 50px;
+            overflow: hidden;
+        }
+        #start-button:hover{
+            color: #fff;
+        }
+        #start-button::after{
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            -webkit-transform: scale(.5);
+            transform: scale(.5);
+        }
+        #start-button::after{
+            background: #333;
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        #reset-button{
+            color: #000;
+            background-color: #fff100;
+            border-bottom: 5px solid #ccc100;
+        }
+        #reset-button:hover{
+            margin-top: 3px;
+            color: #000;
+            background: #fff20a;
+            border-bottom: 2px solid #ccc100;
+        }
     </style>
 </head>
 <body>
